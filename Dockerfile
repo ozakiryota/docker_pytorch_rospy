@@ -64,10 +64,10 @@ RUN apt-get update && \
 	git clone https://github.com/ros-perception/vision_opencv.git && \
 	cd vision_opencv && \
 	git checkout 1.12.8 && \
-	cd /home/catkin_build_ws && \
 	ln -s \
 		/usr/lib/x86_64-linux-gnu/libboost_python-py35.so \
 		/usr/lib/x86_64-linux-gnu/libboost_python3.so && \
+	cd /home/catkin_build_ws && \
 	/bin/bash -c "source /opt/ros/kinetic/setup.bash; catkin build cv_bridge" && \
 	/bin/bash -c "source install/setup.bash --extend"
 ######### initial position ##########
