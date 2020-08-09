@@ -57,7 +57,7 @@ RUN apt-get update && \
 		ros-kinetic-cv-bridge && \
 	mkdir -p /home/catkin_build_ws/src && \
 	cd /home/catkin_build_ws && \
-	catkin init && \
+	# catkin init && \
 	catkin config -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.5m -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.5m.so && \
 	catkin config --install && \
 	cd /home/catkin_build_ws/src && \
@@ -69,6 +69,11 @@ RUN apt-get update && \
 		/usr/lib/x86_64-linux-gnu/libboost_python3.so && \
 	cd /home/catkin_build_ws && \
 	/bin/bash -c "source /opt/ros/kinetic/setup.bash; catkin build cv_bridge" && \
-	/bin/bash -c "source install/setup.bash --extend"
+	/bin/bash -c "source install/setup.bash --extend" && \
+	echo "source /home/catkin_build_ws/install/setup.bash --extend" >> ~/.bashrc
+##### delete cv2 on Python2->3 #####
+RUN rm /opt/ros/kinetic/lib/python2.7/dist-packages/cv2.so && \
+	pip3 install \
+		opencv-python
 ######### initial position ##########
 WORKDIR /home
