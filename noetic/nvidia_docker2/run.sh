@@ -1,12 +1,13 @@
 #!/bin/bash
 
-path_name=$(pwd)
-image_name=${path_name##*/}
+image_name="pytorch_rospy_noetic"
+tag_name="nvidia_docker1"
 
 xhost +
-nvidia-docker run -it --rm \
+docker run -it --rm \
+	--runtime=nvidia \
 	--env="DISPLAY" \
 	--env="QT_X11_NO_MITSHM=1" \
 	--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 	--net=host \
-	$image_name:latest
+	$image_name:$tag_name
